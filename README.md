@@ -43,7 +43,7 @@ python auth-pbkdf2sha256.py
 
 ## Production (uwsgi)
 
-### Dependancies
+### Dependencies
 
 ```
 apt install uwsgi uwsgi-plugin-python nginx
