@@ -33,9 +33,12 @@ Authenticate user against htpasswd file containing pbkdf2 sha256 hashes (typical
 
 ## Test
 
+    Run bottle webserver, listening on http://localhost:8123/auth
+
     ```
     python auth-pbkdf2sha256.py
     ```
+
 
 
 ## Production (uwsgi)
@@ -87,15 +90,14 @@ Authenticate user against htpasswd file containing pbkdf2 sha256 hashes (typical
         proxy_set_header        X-Target  https://$host$request_uri;
     }
 
-
-    error_page 401 403 /login;
-
     location = /auth {
         internal;
         proxy_pass              http://127.0.0.1:8123;
         proxy_pass_request_body off;
         proxy_redirect off;
     }
+
+    error_page 401 403 /login;
 
     location / {
         auth_request     /auth;
